@@ -1,0 +1,35 @@
+class HashTable:
+    def __init__(self):
+        self.collection = {}
+    
+    def hash(self,key:str):
+        total = 0
+        for letter in key:
+            hash_val = ord(letter)
+            total += hash_val
+        return total
+    
+    def add(self,key,value):
+        hashed_key = self.hash(key)
+        if hashed_key not in self.collection:
+            self.collection[hashed_key] = {}
+        self.collection[hashed_key][key] = value
+    
+    def remove(self, key):
+        hashed_key = self.hash(key)
+        if hashed_key in self.collection and key in self.collection[hashed_key]:
+            del self.collection[hashed_key][key]
+
+    def lookup(self, key):
+        hashed_key = self.hash(key)
+        if hashed_key in self.collection and key in self.collection[hashed_key]:
+            return self.collection[hashed_key][key]
+        
+        return None
+
+hashtable = HashTable()
+print(hashtable.hash('zainab'))
+
+hashtable.add('zainab', 'student')
+print(hashtable.collection)      
+print(hashtable.lookup('zainab'))
